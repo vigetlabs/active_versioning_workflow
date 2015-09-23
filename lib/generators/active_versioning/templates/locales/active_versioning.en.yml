@@ -1,0 +1,29 @@
+en:
+  active_versioning:
+    confirmations:
+      create_draft_from_version: 'Are you sure you wish to create a draft from this version?'
+      discard_draft: 'Are you sure you want to discard this draft?'
+    errors:
+      commit: 'An error occurred while committing.'
+      create_draft_from_version: 'An error occurred while restoring this version.'
+    helpers:
+      blank_slate: "This resource doesn't have a draft."
+      commit: 'Committing this draft will overwrite the attributes in the committed version. If the committed version is published, then the changes will be reflected on the live site.'
+    links:
+      blank_slate: 'Create one.'
+      commit: 'Commit'
+      create_draft_from_version: 'Create Draft'
+      discard_draft: 'Discard'
+      edit: 'Edit'
+      preview: 'Preview'
+      view_versions: 'View Versions'
+    not_versioned: '%{model} are not versioned. Any changes you make will appear on the site immediately.'
+    notices:
+      commit: 'Committed!'
+      create_draft_from_version: 'Versioning successfully restored.'
+      discard_draft: 'Draft successfully discarded.'
+    panels:
+      committed_version: 'Committed Version'
+      current_draft: 'Current Draft'
+    placeholders:
+      commit: 'Enter a note about what changed.'

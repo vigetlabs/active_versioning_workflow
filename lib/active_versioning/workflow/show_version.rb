@@ -6,13 +6,13 @@ module ActiveVersioning
       end
 
       def version_attributes_panel(version, &block)
-        panel(I18n.t('active_admin.details', model: resource_config.resource_label)) do
+        panel I18n.t('active_admin.details', model: resource_config.resource_label) do
           instance_eval(&block)
         end
       end
 
       def version_details_panel
-        panel(I18n.t('active_admin.details', model: Version.model_name.human)) do
+        panel I18n.t('active_admin.details', model: Version.model_name.human) do
           attributes_table_for(resource) do
             row 'Responsible for Change', &:committer
             row :commit_message
@@ -24,7 +24,6 @@ module ActiveVersioning
       def versioned_resource
         @versioned_resource ||= resource.reify
       end
-
 
       private
 

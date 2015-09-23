@@ -1,0 +1,17 @@
+<div class="commit-draft">
+  <%= form_tag [:commit, :admin, resource], method: :put do %>
+    <p class="input string">
+      <%= text_field_tag :commit_message, params[:commit_message], placeholder: t('active_versioning.placeholders.commit') %>
+    </p>
+
+    <p>
+      <%= submit_tag 'Commit' %>
+      <%= link_to 'Cancel', '#', class: 'table_tools_button cancel-commit' %>
+    </p>
+
+    <p class="inline-hints">
+      <%= t('active_versioning.helpers.commit') %>
+    </p>
+  <% end %>
+  <hr>
+</div>
