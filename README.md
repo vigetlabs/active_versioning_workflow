@@ -14,7 +14,7 @@ These should all be installed and configured as well.
 
 Add this line to your application's Gemfile:
 ```ruby
-gem 'active_versioning_workflow'
+gem 'active_versioning_workflow', git: 'git@github.com:vigetlabs/active_versioning_workflow.git'
 ```
 
 And then execute:
