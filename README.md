@@ -104,7 +104,7 @@ When all is said and done, this will give us an awesome interface for version wo
 ActiveVersioning Workflow allows for some optional basic previewing functionality that leverages the non-admin controller for a resource.  If you'd like to take advantage of previewing, here's how you'll want to set it up:
 ```ruby
 class PostsController < ApplicationController
-  extend ActiveVersioning::Workflow
+  extend ActiveVersioning::Workflow::Previewable
 
   preview_resource :post
 
