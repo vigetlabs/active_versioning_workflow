@@ -1,5 +1,5 @@
 require 'active_versioning'
-require 'active_versioning/engine'
+require 'active_versioning/workflow/engine'
 require 'generators/active_versioning/workflow_generator'
 
 module ActiveVersioning

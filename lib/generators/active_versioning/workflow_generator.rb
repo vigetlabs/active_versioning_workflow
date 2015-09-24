@@ -31,10 +31,5 @@ module ActiveVersioning
     def install_active_admin_views
       copy_file 'active_admin_views/_commit_form.html.erb', 'app/views/active_admin/resource/_commit_form.html.erb'
     end
-
-    def install_assets
-      copy_file 'stylesheets/active_versioning.scss', 'app/assets/stylesheets/active_versioning.scss'
-      copy_file 'javascripts/active_versioning.js', 'app/assets/javascripts/active_versioning.js'
-    end
   end
 end

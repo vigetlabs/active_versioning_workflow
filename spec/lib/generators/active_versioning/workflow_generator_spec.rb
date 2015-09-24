@@ -44,11 +44,6 @@ RSpec.describe ActiveVersioning::WorkflowGenerator, type: :generator do
     assert_file 'app/views/active_admin/resource/_commit_form.html.erb', /form_tag \[:commit, :admin, resource\]/
   end
 
-  it "generates the asset files" do
-    assert_file 'app/assets/stylesheets/active_versioning.scss', /ActiveVersioning Styles/
-    assert_file 'app/assets/javascripts/active_versioning.js', /commit-draft/
-  end
-
   def create_placeholder_routes_file
     (destination_root + '/config').tap do |folder|
       FileUtils.mkdir_p(folder)
