@@ -18,7 +18,7 @@ module ActiveVersioning
           else
             header_action(discard_link)
             header_action(commit_link)
-            #header_action(preview_link)
+            header_action(preview_link)
             header_action(edit_link)
 
             render 'commit_form'
@@ -101,10 +101,14 @@ module ActiveVersioning
         link_to I18n.t('active_versioning.links.edit'), [:edit, active_admin_namespace.name, resource], class: 'edit-link'
       end
 
-      def preview_link
-        controller = "#{resource_class.to_s.pluralize}Controller".constantize
+      def preview_controller
+        @preview_controller ||= "#{resource_class.to_s.pluralize}Controller".safe_constantize
+      end
 
-        return '' unless controller.singleton_class.ancestors.include?(Previewable)
+      def preview_link
+        unless preview_controller && preview_controller.singleton_class.ancestors.include?(ActiveVersioning::Workflow::Previewable)
+          return ''
+        end
 
         link_to I18n.t('active_versioning.links.preview'), polymorphic_url(resource, _preview: true), {
           class:  'preview-link',
