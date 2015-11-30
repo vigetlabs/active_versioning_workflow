@@ -5,6 +5,12 @@
  * Dependent upon ActiveMaterial.
  */
 
+// These variables will be overriden by ActiveMaterial if it exists
+$theme-divider: #efefef !default;
+$theme-primary: #009688 !default;
+$theme-accent: #cddc39 !default;
+$theme-error: #f44336 !default;
+
 .column {
   float: left;
 }
