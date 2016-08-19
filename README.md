@@ -7,7 +7,7 @@ ActiveVersioning Workflow is an extension of ActiveVersioning that provides vers
 ActiveVersioning Workflow is designed for ActiveAdmin, ActiveMaterial, and Rails 4.2+ applications, so ensure you have the following in your gemfile:
 ```ruby
 gem 'activeadmin', github: 'activeadmin'
-gem 'devise' # Necessary if using standard ActiveAdmin configuration                           
+gem 'devise' # Necessary if using standard ActiveAdmin configuration
 gem 'active_material', git: 'git@github.com:vigetlabs/active_material.git'
 ```
 These should all be installed and configured as well.
@@ -68,6 +68,22 @@ end
 In a fresh ActiveAdmin-based Rails app, this is what your routes file would look like in order to manage a versioned `Post` model in ActiveAdmin under the `:admin` namespace (default namespace for ActiveAdmin).  If you have ActiveAdmin configured differently and are using different namespaces, you'll want to use `versioned_routes` in the appropriate context.
 
 In this example, we'd get routes like `/admin/posts/1/versions` and `/admin/posts/1/versions/1`.
+
+*Note: If you are using a different attribute for admin URLs (eg: slug or friendly_id), then you'll need to manually specify this in `app/admin/version.rb` after running the generator. Running with the Post example, that would look like so:*
+
+```ruby
+ActiveAdmin.register Version do
+  # ...
+
+  controller do
+    belongs_to *ActiveVersioning.versioned_models.map { |model| model.name.underscore.to_sym }, polymorphic: true
+    # Add this line below
+    belongs_to :post, polymorphic: true, finder: :find_by_slug!
+
+    # ...
+  end
+end
+```
 
 ### Versioned Controller (using `ActiveVersioning::Workflow::Controller`)
 Running with the example of a versioned `Post` model, we should have a file that registers the `Post` model with ActiveAdmin (generated with the `rails generate active_admin:resource Post` command and probably lives at `app/admin/post.rb`).  At the top of the register block, include the controller module:
