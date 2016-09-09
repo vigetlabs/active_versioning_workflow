@@ -1,5 +1,7 @@
 en:
   active_versioning:
+    actions:
+      draft: 'Save Draft'
     confirmations:
       create_draft_from_version: 'Are you sure you wish to create a draft from this version?'
       discard_draft: 'Are you sure you want to discard this draft?'
