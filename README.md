@@ -61,6 +61,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     versioned_routes :posts
+
+    # If the Post model was namespaced -- something like Blog::Post -- you'd need to do the following based on how AA sets up routes:
+    versioned_routes :blog_posts
   end
 end
 ```
@@ -76,8 +79,12 @@ ActiveAdmin.register Version do
   # ...
 
   controller do
-    belongs_to *ActiveVersioning.versioned_models.map { |model| model.name.underscore.to_sym }, polymorphic: true
-    # Add this line below
+    # Override the finder option if all your versioned models use the same thing, like `finder: :find_by_slug!` for example.
+    ActiveVersioning.versioned_models.each do |model|
+      belongs_to model.name.underscore.gsub('/', '_').to_sym, class_name: model.name, polymorphic: true, finder: :find_by_id!
+    end
+
+    # Otherwise, either replace the above block or explicitly add a `belongs_to` statement for each non-standard model:
     belongs_to :post, polymorphic: true, finder: :find_by_slug!
 
     # ...
@@ -94,6 +101,25 @@ end
 ```
 
 This adds the necessary actions to the admin controller for our resource so we can work with versions.
+
+### Versioned Form
+Use the `draft_actions` method over the default `actions` method at the end of the form block:
+```ruby
+ActiveAdmin.register Post do
+  include ActiveVersioning::Workflow::Controller
+
+  form do |f|
+    inputs do
+      input :title
+      input :body
+    end
+
+    draft_actions
+  end
+end
+```
+
+This pulls a label from `t('active_versioning.actions.draft')`, which is included in the generated locale file for ActiveVersioning Workflow.  It defaults to "Save Draft".
 
 ### Versioned Show Page
 Finally, we'll want to configure the show page for our versioned resource.  This is done in a similar style to the regular `show` block in ActiveAdmin, except that we'll use `show_version` and `version_attributes_panel`:
