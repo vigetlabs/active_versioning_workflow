@@ -28,7 +28,9 @@ ActiveAdmin.register Version do
   show title: :to_s
 
   controller do
-    belongs_to *ActiveVersioning.versioned_models.map { |model| model.name.underscore.to_sym }, polymorphic: true
+    ActiveVersioning.versioned_models.each do |model|
+      belongs_to model.name.underscore.gsub('/', '_').to_sym, class_name: model.name, polymorphic: true, finder: :find_by_id!
+    end
 
     private
 
