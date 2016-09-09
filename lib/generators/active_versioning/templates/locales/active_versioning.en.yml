@@ -22,7 +22,7 @@ en:
     not_versioned: '%{model} are not versioned. Any changes you make will appear on the site immediately.'
     notices:
       commit: 'Committed!'
-      create_draft_from_version: 'Versioning successfully restored.'
+      create_draft_from_version: 'Version successfully restored.'
       discard_draft: 'Draft successfully discarded.'
     panels:
       committed_version: 'Committed Version'

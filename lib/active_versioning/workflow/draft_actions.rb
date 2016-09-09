@@ -6,7 +6,7 @@ module ActiveVersioning
           actions
         else
           actions do
-            action :submit, label: :draft
+            action :submit, label: t('active_versioning.actions.draft')
             cancel_link
           end
         end
