@@ -1,0 +1,14 @@
+body.am-live-preview {
+  padding-right: 30%;
+}
+
+#live_preview {
+  background: white;
+  box-shadow: 0 1px 4px rgba(black, 0.2);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 30%;
+  z-index: 0;
+}
