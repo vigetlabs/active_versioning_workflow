@@ -2,12 +2,9 @@
 //= require active_versioning/lodash.custom
 
 (function (global) {
-  var debounce = require('lodash.debounce');
-  var serialize = require('form-serialize');
-
   function send (form, callback) {
     var http   = new XMLHttpRequest();
-    var params = serialize(form, { hash: true });
+    var params = global.FormSerialize(form, { hash: true });
     var method = (params['_method'] || form.method).toUpperCase();
 
     http.open(method, form.action, true);;
@@ -50,7 +47,7 @@
       frame.contentWindow.postMessage(options.url, document.origin);
     }
 
-    var update = debounce(function() {
+    var update = global._.debounce(function() {
       if (request) {
         request.abort();
       }
