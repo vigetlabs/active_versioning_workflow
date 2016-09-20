@@ -44,7 +44,7 @@
     document.body.className += ' am-live-preview';
 
     var refresh = function () {
-      frame.contentWindow.postMessage(options.url, document.origin);
+      frame.contentWindow.postMessage(options.url, window.location.origin);
     }
 
     var update = global._.debounce(function() {
