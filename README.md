@@ -168,3 +168,24 @@ In the ActiveAdmin draft panel, you'll see an extra preview button:
 ![preview](https://s3.amazonaws.com/f.cl.ly/items/1a3E1I0N3G36211k3m3t/Screen%20Shot%202015-09-24%20at%209.15.47%20AM.png)
 
 This will open a new window with our `PostsController#show` rendered out with the current draft version of our post.
+
+## Live Preview
+
+Invoke the previewer with:
+
+```javascript
+//= require active_versioning/live-preview
+
+var updater = ActivePreview({
+  // URL to the page to preview
+  url: "http://example.com/preview",
+
+  // Where to find live-preview.html
+  frameSrc: "/active-versioning/live-preview.html"
+});
+
+// Use updater however you want to emit an update. For example, with Colonel Kurtz
+var editor = new ColonelKurtz();
+
+editor.listen(updater);
+```

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Live Preview</title>
+    <style>
+      body {
+        background: white;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        margin: 0;
+      }
+
+      iframe {
+        background: white;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        transition: 0.2s opacity;
+        width: 100%;
+      }
+
+      .active {
+        opacity: 1;
+        z-index: 1
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="buffer" frameborder="0"></iframe>
+
+    <script>
+      var template = document.createElement('iframe');
+      template.frameBorder = 0;
+
+      var buffer = template.cloneNode();
+
+      window.addEventListener("message", function (event) {
+        var frame = template.cloneNode();
+
+        document.body.appendChild(frame);
+
+        frame.onload = function () {
+          frame.onload    = null;
+          frame.className = 'active';
+
+          if (buffer.contentWindow) {
+            frame.contentWindow.scrollTo(0, buffer.contentWindow.scrollY);
+          }
+
+          setTimeout(function() {
+            buffer.remove();
+            buffer = frame;
+          }, 200);
+        }
+
+        frame.src = event.data;
+      }, false);
+    </script>
+  </body>
+</html>
