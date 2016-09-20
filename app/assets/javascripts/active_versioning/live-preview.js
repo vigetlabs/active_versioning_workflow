@@ -34,7 +34,7 @@
   }
 
   function previewer (options) {
-    options = options || {}
+    options = options || {};
 
     var frame = document.createElement('iframe');
     var form  = document.querySelector('form');
@@ -66,8 +66,8 @@
 
     frame.src = options.frameSrc;
 
-    return update
+    return update;
   }
 
   global.ActivePreview = previewer;
-})(window)
+})(window);
