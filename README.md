@@ -169,6 +169,21 @@ In the ActiveAdmin draft panel, you'll see an extra preview button:
 
 This will open a new window with our `PostsController#show` rendered out with the current draft version of our post.
 
+You'll also be able to use `actions_with_preview` in place of `actions` inside the default `index` block in an ActiveAdmin resource definition:
+```ruby
+ActiveAdmin.register Post do
+  include ActiveVersioning::Workflow::Controller
+
+  permit_params :title, :body
+
+  index do
+    column :title
+
+    actions_with_preview
+  end
+end
+```
+
 ## Live Preview
 
 Invoke the previewer with:

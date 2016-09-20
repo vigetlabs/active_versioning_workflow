@@ -1,6 +1,8 @@
 module ActiveVersioning
   module Workflow
     class ShowResource < ::ActiveAdmin::Views::Pages::Show
+      include ActiveVersioning::Workflow::PreviewLink
+
       def main_content
         instance_exec(resource, &show_block)
       end
@@ -101,19 +103,10 @@ module ActiveVersioning
         link_to I18n.t('active_versioning.links.edit'), [:edit, active_admin_namespace.name, resource], class: 'edit-link'
       end
 
-      def preview_controller
-        @preview_controller ||= "#{resource_class.to_s.pluralize}Controller".safe_constantize
-      end
-
       def preview_link
-        unless preview_controller && preview_controller.singleton_class.ancestors.include?(ActiveVersioning::Workflow::Previewable)
-          return ''
-        end
+        return '' unless ActiveVersioning::Workflow.previewable?(resource)
 
-        link_to I18n.t('active_versioning.links.preview'), polymorphic_url(resource, _preview: true), {
-          class:  'preview-link',
-          target: :blank
-        }
+        preview_link_for(resource)
       end
 
       def discard_link
