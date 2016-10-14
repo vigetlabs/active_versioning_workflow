@@ -142,7 +142,7 @@ end
 When all is said and done, this will give us an awesome interface for version workflow in ActiveAdmin:
 ![example](https://s3.amazonaws.com/f.cl.ly/items/2i2h1T1J0v2h0C2n0v3N/Screen%20Shot%202015-09-23%20at%203.15.32%20PM.png)
 
-### Live Preview
+### Preview
 ActiveVersioning Workflow allows for some optional basic previewing functionality that leverages the non-admin controller for a resource.  If you'd like to take advantage of previewing, here's how you'll want to set it up:
 ```ruby
 class PostsController < ApplicationController
@@ -184,10 +184,20 @@ ActiveAdmin.register Post do
 end
 ```
 
-## Live Preview
+### Live Preview
 
-Invoke the previewer with:
+If you're using the above preview functionality, you can also tap into some optional -- somewhat experimental -- real-time live preview on edit pages.
 
+To use the real-time live preview, there's some additional setup required.
+
+Mount ActiveVersioning Workflow's routes:
+```
+# config/routes.rb
+
+mount ActiveVerioning::Workflow::Engine, as: 'active_versioning'
+```
+
+Inside a JS file included into the asset pipeline, invoke the previewer with:
 ```javascript
 //= require active_versioning/live-preview
 
