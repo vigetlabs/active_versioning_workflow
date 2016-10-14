@@ -9,14 +9,22 @@ module ActiveVersioning
       end
 
       def preview_path_for(resource, options = {})
-        resource_path = proc do |resource|
+        path = if resource.respond_to? :path
+          resource.path(_preview: true)
+        end
+
+        path.presence || preview_path_proc.call(resource, options)
+      end
+
+      private
+
+      def preview_path_proc
+        proc do |resource, options|
           param     = resource.try(:slug) || resource.to_param
           route_key = resource.model_name.singular_route_key
 
           options.fetch(:context, self).send("#{route_key}_path", param, _preview: true)
         end
-
-        resource.try(:path, _preview: true) || resource_path.call(resource)
       end
     end
   end
