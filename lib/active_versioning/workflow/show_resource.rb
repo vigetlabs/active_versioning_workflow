@@ -61,7 +61,8 @@ module ActiveVersioning
       end
 
       def version_config
-        active_admin_config.get_page_presenter(:show_version)
+        active_admin_config.get_page_presenter(:show_version) ||
+          raise(ShowPageError, active_admin_config.resource_name)
       end
 
       def version_block

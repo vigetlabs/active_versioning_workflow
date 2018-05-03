@@ -14,6 +14,12 @@ module ActiveVersioning
     autoload :ShowResource,       'active_versioning/workflow/show_resource'
     autoload :ShowVersion,        'active_versioning/workflow/show_version'
 
+    class ShowPageError < RuntimeError
+      def initialize(resource_name)
+        super("Missing `show_version` block for `#{resource_name}` admin configuration")
+      end
+    end
+
     def self.previewable?(resource)
       preview_controller = "#{resource.class.to_s.pluralize}Controller".safe_constantize
 
