@@ -1,6 +1,6 @@
 # ActiveVersioning Workflow
 
-ActiveVersioning Workflow is an extension of ActiveVersioning that provides version workflow for ActiveAdmin-based CMSes.
+ActiveVersioning Workflow is an extension of [ActiveVersioning](https://github.com/vigetlabs/active_versioning) that provides version workflow for ActiveAdmin-based CMSes.
 
 ## Installation
 
